@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const admin = require('firebase-admin');
+require('dotenv').config();
 
 
-const port = 5000
+const port = 5000;
 
 const app = express();
 
@@ -21,7 +22,7 @@ admin.initializeApp({
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://organicUser:Bangladesh331551@cluster0.plevr.mongodb.net/burj-al-arab?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.plevr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true , useUnifiedTopology: true});
 client.connect(err => {
   const booking = client.db("burj-al-arab").collection("hotels");
@@ -77,4 +78,4 @@ client.connect(err => {
 //   res.send('Hello World!')
 // })
 
-app.listen(port)
+app.listen(process.env.PORT || port)
