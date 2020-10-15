@@ -28,6 +28,10 @@ client.connect(err => {
   const booking = client.db("burj-al-arab").collection("hotels");
   // perform actions on the collection object
   
+  app.get('/', (req, res) => {
+    res.send("It's from Database! Imaging!!");
+  });
+
   app.post('/addBooking', (req, res) => {
     const newBooking = req.body;
 
